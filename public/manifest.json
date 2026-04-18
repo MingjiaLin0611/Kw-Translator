@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "keyword-translator",
+  "description": "Annotate selected glossary terms inline as keyword(translation) while keeping the original text visible.",
+  "version": "0.1.0",
+  "permissions": ["storage", "tabs", "activeTab", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "keyword-translator",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
+

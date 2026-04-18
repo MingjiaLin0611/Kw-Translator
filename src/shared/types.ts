@@ -1,0 +1,45 @@
+export interface GlossaryEntry {
+  id: string;
+  source: string;
+  translation: string;
+  enabled: boolean;
+  caseSensitive: boolean;
+  createdAt: number;
+  updatedAt: number;
+}
+
+export interface DomainRule {
+  id: string;
+  pattern: string;
+  mode: "allow" | "block";
+  enabled: boolean;
+}
+
+export interface ExtensionSettings {
+  extensionEnabled: boolean;
+  annotateOnLoad: boolean;
+  annotationMode: "inline-brackets";
+  excludedTags: string[];
+}
+
+export interface StorageShape {
+  glossary: GlossaryEntry[];
+  domainRules: DomainRule[];
+  settings: ExtensionSettings;
+}
+
+export interface AnnotationRequest {
+  type: "kwt:annotate-page";
+}
+
+export interface SettingsUpdateRequest {
+  type: "kwt:update-extension-enabled";
+  enabled: boolean;
+}
+
+export interface PopupState {
+  hostname: string;
+  isEnabled: boolean;
+  glossaryCount: number;
+}
+

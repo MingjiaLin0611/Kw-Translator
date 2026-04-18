@@ -1,0 +1,129 @@
+:root {
+  color: #14253d;
+  background:
+    radial-gradient(circle at top right, rgba(0, 150, 136, 0.12), transparent 20%),
+    linear-gradient(180deg, #fbfbf6 0%, #f2f7fb 100%);
+  font-family: "Segoe UI", "PingFang SC", sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+.options-shell {
+  min-height: 100vh;
+  padding: 32px;
+}
+
+.hero {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #0d7d70;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+.toggle-card,
+.card {
+  border: 1px solid rgba(20, 37, 61, 0.08);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 14px 36px rgba(20, 37, 61, 0.08);
+}
+
+.toggle-card {
+  display: grid;
+  gap: 12px;
+  min-width: 220px;
+  padding: 20px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  gap: 20px;
+}
+
+.card {
+  padding: 20px;
+}
+
+.form-card {
+  display: grid;
+  gap: 12px;
+}
+
+.form-card label {
+  display: grid;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.form-card input {
+  border: 1px solid rgba(20, 37, 61, 0.18);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-card button,
+.entry-item button {
+  border: 0;
+  border-radius: 12px;
+  padding: 10px 12px;
+  color: white;
+  background: linear-gradient(135deg, #177245 0%, #0d7d70 100%);
+  cursor: pointer;
+}
+
+.list-header,
+.entry-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.entry-list {
+  display: grid;
+  gap: 12px;
+}
+
+.entry-item {
+  border: 1px solid rgba(20, 37, 61, 0.08);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.entry-item p {
+  margin: 4px 0 0;
+  color: #58687d;
+}
+
+@media (max-width: 860px) {
+  .hero,
+  .layout {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+}
+
