@@ -1,0 +1,13 @@
+flowchart TD
+  U1["用户查看 M2 设计"] --> P1["阅读 m2-plan.md"]
+  P1 --> D1["查看 options 流程图"]
+  P1 --> D2["查看 popup 流程图"]
+  P1 --> D3["查看 background 流程图"]
+  P1 --> D4["查看 content 流程图"]
+  P1 --> D5["查看 shared 流程图"]
+
+  D1 --> R1["聚焦 src/options/*.ts(x)"]
+  D2 --> R2["聚焦 src/popup/*.ts(x)"]
+  D3 --> R3["聚焦 src/background/*.ts"]
+  D4 --> R4["聚焦 src/content/*.ts"]
+  D5 --> R5["聚焦 src/shared/*.ts"]

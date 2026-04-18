@@ -5,10 +5,15 @@ export function isForbiddenNode(node: Node, excludedTags: string[]) {
     return true;
   }
 
-  if (parentElement.closest("[data-kwt-root='true']")) {
+  if (parentElement.closest("[data-kwt-root='true'], [contenteditable='true'], [contenteditable='plaintext-only']")) {
     return true;
   }
 
-  return excludedTags.includes(parentElement.tagName);
-}
+  const excludedSelector = excludedTags.map((tagName) => tagName.toLowerCase()).join(", ");
 
+  if (!excludedSelector) {
+    return false;
+  }
+
+  return parentElement.closest(excludedSelector) !== null;
+}

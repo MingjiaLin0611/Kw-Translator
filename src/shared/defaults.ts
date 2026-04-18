@@ -3,6 +3,7 @@ import type { ExtensionSettings, StorageShape } from "./types";
 export const DEFAULT_SETTINGS: ExtensionSettings = {
   extensionEnabled: true,
   annotateOnLoad: true,
+  themeMode: "light",
   annotationMode: "inline-brackets",
   excludedTags: ["CODE", "PRE", "SCRIPT", "STYLE", "TEXTAREA", "INPUT"]
 };
@@ -31,4 +32,3 @@ export const DEFAULT_STORAGE: StorageShape = {
   domainRules: [],
   settings: DEFAULT_SETTINGS
 };
-

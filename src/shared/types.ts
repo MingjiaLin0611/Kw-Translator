@@ -18,6 +18,7 @@ export interface DomainRule {
 export interface ExtensionSettings {
   extensionEnabled: boolean;
   annotateOnLoad: boolean;
+  themeMode: "light" | "dark";
   annotationMode: "inline-brackets";
   excludedTags: string[];
 }
@@ -32,6 +33,10 @@ export interface AnnotationRequest {
   type: "kwt:annotate-page";
 }
 
+export interface PopupBootstrapRequest {
+  type: "kwt:get-popup-state";
+}
+
 export interface SettingsUpdateRequest {
   type: "kwt:update-extension-enabled";
   enabled: boolean;
@@ -41,5 +46,5 @@ export interface PopupState {
   hostname: string;
   isEnabled: boolean;
   glossaryCount: number;
+  themeMode: ExtensionSettings["themeMode"];
 }
-

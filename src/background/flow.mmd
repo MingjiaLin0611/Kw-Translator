@@ -1,0 +1,19 @@
+flowchart TD
+  M1["收到消息"] --> C1["createBackgroundMessageHandler"]
+
+  C1 --> Q1["消息类型: kwt:get-popup-state"]
+  C1 --> Q2["消息类型: kwt:update-extension-enabled"]
+  C1 --> Q3["消息类型: kwt:annotate-page"]
+
+  Q1 --> T1["queryActiveTab"]
+  T1 --> B1["buildPopupState"]
+  B1 --> R1["返回 PopupState"]
+
+  Q2 --> T2["queryActiveTab"]
+  T2 --> S1["updateSettings"]
+  S1 --> B2["buildPopupState"]
+  B2 --> R2["返回同步后的 PopupState"]
+
+  Q3 --> T3["queryActiveTab"]
+  T3 --> C2["sendMessageToTab"]
+  C2 --> R3["向 content 发送 kwt:run-annotation"]

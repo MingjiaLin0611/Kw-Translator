@@ -1,0 +1,21 @@
+flowchart TD
+  L1["页面加载"] --> F1["请求状态(sendMessage: kwt:get-popup-state)"]
+  F1 --> B1["background 返回 PopupState"]
+  B1 --> V1["更新 hostname / isEnabled / glossaryCount / themeMode"]
+  V1 --> T1["applyTheme"]
+
+  U1["用户点击"] --> F2["立即注释(handleAnnotate)"]
+  F2 --> B2["sendMessage: kwt:annotate-page"]
+  B2 --> V2["关闭 popup"]
+
+  U2["用户点击"] --> F3["切换扩展开关(handleToggle)"]
+  F3 --> B3["sendMessage: kwt:update-extension-enabled"]
+  B3 --> V3["回写 PopupState"]
+
+  U3["用户点击"] --> F4["切换主题(handleThemeToggle)"]
+  F4 --> S1["updateSettings"]
+  S1 --> T1
+  T1 --> V4["刷新 popup 主题显示"]
+
+  U4["用户点击"] --> F5["打开设置页(openOptionsPage)"]
+  F5 --> V5["跳转 options 页面"]

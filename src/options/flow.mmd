@@ -1,0 +1,26 @@
+flowchart TD
+  U1["用户输入"] --> F1["保存术语(handleSaveEntry)"]
+  U2["用户点击"] --> F2["删除术语(handleDeleteEntry)"]
+  U3["用户点击"] --> F3["切换自动注释(handleToggleAnnotateOnLoad)"]
+  U4["用户点击"] --> F4["切换主题(handleToggleTheme)"]
+  U5["用户点击"] --> F5["导出文件(handleExportFile)"]
+  U6["用户点击"] --> F6["复制 JSON(handleCopyGlossary)"]
+  U7["用户选择文件"] --> F7["导入文件(handleImportFile)"]
+  U8["用户输入"] --> F8["导入粘贴 JSON(handleImportText)"]
+
+  F1 --> S1["saveGlossary"]
+  F2 --> S1
+  F3 --> S2["updateSettings"]
+  F4 --> S2
+  F4 --> T1["applyTheme"]
+  F5 --> X1["serializeGlossary"]
+  F6 --> X2["createClipboardGlossaryPayload"]
+  F7 --> X3["parseGlossaryImport"]
+  F8 --> X3
+  X3 --> S1
+  S1 --> V1["刷新 entries 状态"]
+  S2 --> V2["刷新 annotateOnLoad / themeMode 状态"]
+  T1 --> V3["更新 documentElement.dataset.theme"]
+  X1 --> V4["下载 glossary JSON 文件"]
+  X2 --> V5["写入系统剪贴板"]
+  X3 --> V6["显示导入结果消息"]

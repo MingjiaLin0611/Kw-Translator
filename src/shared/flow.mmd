@@ -1,0 +1,27 @@
+flowchart TD
+  S1["storage.ts"] --> A1["getStorageData"]
+  S1 --> A2["saveStorageData"]
+  S1 --> A3["updateSettings"]
+  S1 --> A4["saveGlossary"]
+
+  A1 --> R1["组合 DEFAULT_STORAGE 与 chrome.storage"]
+  A3 --> R2["返回最新 settings"]
+  A4 --> R3["返回最新 glossary"]
+
+  S2["glossary-transfer.ts"] --> B1["createGlossaryExportPayload"]
+  S2 --> B2["serializeGlossary"]
+  S2 --> B3["createClipboardGlossaryPayload"]
+  S2 --> B4["parseGlossaryImport"]
+
+  B1 --> R4["导出 version / exportedAt / glossary"]
+  B4 --> R5["校验导入 JSON 结构"]
+
+  S3["matcher.ts"] --> C1["sortEntries"]
+  S3 --> C2["splitTextByMatches"]
+  C2 --> R6["优先最长术语匹配"]
+
+  S4["dom.ts"] --> D1["isForbiddenNode"]
+  D1 --> R7["过滤 code / pre / 已注释节点 / contenteditable"]
+
+  S5["theme.ts"] --> E1["applyTheme"]
+  E1 --> R8["写入 documentElement.dataset.theme"]

@@ -1,29 +1,68 @@
 :root {
-  color: #132238;
-  background:
-    radial-gradient(circle at top left, rgba(255, 197, 61, 0.45), transparent 30%),
-    linear-gradient(160deg, #fff7ec 0%, #eef5ff 55%, #f7fbff 100%);
-  font-family: "Segoe UI", "PingFang SC", sans-serif;
+  color-scheme: light;
+  --bg-canvas: #ede8df;
+  --bg-surface: rgba(255, 252, 246, 0.94);
+  --bg-surface-strong: #fffdf9;
+  --bg-muted: rgba(32, 38, 44, 0.08);
+  --text-primary: #1f2933;
+  --text-secondary: #5b6875;
+  --text-accent: #79583b;
+  --border-soft: rgba(31, 41, 51, 0.12);
+  --shadow-soft: 0 14px 32px rgba(15, 23, 42, 0.1);
+  --button-primary: #415a4b;
+  --button-primary-hover: #354a3e;
+  --button-secondary: rgba(31, 41, 51, 0.08);
+  --button-secondary-hover: rgba(31, 41, 51, 0.14);
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: "Aptos", "PingFang SC", "Microsoft YaHei UI", sans-serif;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-canvas: #171a1d;
+  --bg-surface: rgba(28, 33, 37, 0.96);
+  --bg-surface-strong: #20252a;
+  --bg-muted: rgba(255, 255, 255, 0.08);
+  --text-primary: #f3f4f6;
+  --text-secondary: #c3cad2;
+  --text-accent: #d5b58d;
+  --border-soft: rgba(255, 255, 255, 0.12);
+  --shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.28);
+  --button-primary: #8cab8c;
+  --button-primary-hover: #789678;
+  --button-secondary: rgba(255, 255, 255, 0.08);
+  --button-secondary-hover: rgba(255, 255, 255, 0.14);
 }
 
 body {
   margin: 0;
   min-width: 360px;
+  background: var(--bg-canvas);
+}
+
+button,
+input {
+  font: inherit;
 }
 
 .popup-shell {
   display: grid;
   gap: 16px;
   padding: 18px;
+  background:
+    linear-gradient(90deg, transparent 0, transparent calc(100% - 1px), var(--bg-muted) calc(100% - 1px)),
+    linear-gradient(var(--bg-muted) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 .hero-card,
 .panel {
-  border: 1px solid rgba(19, 34, 56, 0.1);
+  border: 1px solid var(--border-soft);
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 12px 32px rgba(38, 61, 94, 0.08);
-  backdrop-filter: blur(12px);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(10px);
 }
 
 .hero-card {
@@ -32,7 +71,7 @@ body {
 
 .eyebrow {
   margin: 0 0 8px;
-  color: #9a6300;
+  color: var(--text-accent);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -42,17 +81,18 @@ body {
 h1 {
   margin: 0 0 10px;
   font-size: 24px;
-  line-height: 1.2;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
 }
 
 .description {
   margin: 0;
-  color: #516275;
+  color: var(--text-secondary);
   line-height: 1.5;
 }
 
 .description code {
-  color: #0f5f9a;
+  color: var(--text-primary);
   font-size: 13px;
 }
 
@@ -66,6 +106,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
 }
 
 .switch {
@@ -87,15 +128,23 @@ h1 {
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
+  transition: background-color 140ms ease;
 }
 
 .primary-button {
-  color: white;
-  background: linear-gradient(135deg, #0f5f9a 0%, #0a8aa6 100%);
+  color: #f8fafc;
+  background: var(--button-primary);
+}
+
+.primary-button:hover {
+  background: var(--button-primary-hover);
 }
 
 .secondary-button {
-  color: #132238;
-  background: rgba(19, 34, 56, 0.08);
+  color: var(--text-primary);
+  background: var(--button-secondary);
 }
 
+.secondary-button:hover {
+  background: var(--button-secondary-hover);
+}

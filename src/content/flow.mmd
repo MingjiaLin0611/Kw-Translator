@@ -1,0 +1,19 @@
+flowchart TD
+  E1["收到消息 / 页面启动"] --> F1["runAnnotation"]
+  F1 --> G1["getStorageData"]
+  G1 --> C1["检查 extensionEnabled / isSiteEnabled"]
+  C1 -->|否| R1["直接结束"]
+  C1 -->|是| C2["annotateDocument"]
+
+  C2 --> C3["collectTextNodes"]
+  C3 --> D1["isForbiddenNode"]
+  D1 -->|跳过| R2["忽略当前文本节点"]
+  D1 -->|允许| C4["annotateTextNode"]
+
+  C4 --> M1["splitTextByMatches"]
+  M1 -->|无命中| R3["保留原文本"]
+  M1 -->|有命中| C5["创建 span[data-kwt-root]"]
+  C5 --> R4["替换文本节点为注释片段"]
+
+  F1 --> L1["annotationRunInFlight"]
+  L1 --> R5["防止重复并发执行"]
