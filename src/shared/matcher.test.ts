@@ -39,5 +39,47 @@ describe("splitTextByMatches", () => {
       }
     ]);
   });
-});
 
+  it("ignores disabled entries and honors case-sensitive entries", () => {
+    const segments = splitTextByMatches("Memoization memoization dependency.", [
+      {
+        id: "case-sensitive",
+        source: "Memoization",
+        translation: "Memoization",
+        enabled: true,
+        caseSensitive: true,
+        createdAt: 0,
+        updatedAt: 0
+      },
+      {
+        id: "disabled",
+        source: "dependency",
+        translation: "Dependency",
+        enabled: false,
+        caseSensitive: false,
+        createdAt: 0,
+        updatedAt: 0
+      }
+    ]);
+
+    expect(segments).toEqual([
+      {
+        type: "match",
+        value: "Memoization",
+        entry: {
+          id: "case-sensitive",
+          source: "Memoization",
+          translation: "Memoization",
+          enabled: true,
+          caseSensitive: true,
+          createdAt: 0,
+          updatedAt: 0
+        }
+      },
+      {
+        type: "text",
+        value: " memoization dependency."
+      }
+    ]);
+  });
+});

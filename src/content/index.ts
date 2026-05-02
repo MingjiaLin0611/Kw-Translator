@@ -1,13 +1,29 @@
 import { isForbiddenNode } from "../shared/dom";
-import type { GlossaryEntry } from "../shared/types";
+import type { DomainRule, ExtensionSettings, GlossaryEntry } from "../shared/types";
 import { splitTextByMatches } from "../shared/matcher";
 import { getStorageData } from "../shared/storage";
 import { isSiteEnabled } from "../shared/site";
 
 const ROOT_MARKER = "data-kwt-root";
 let annotationRunInFlight = false;
+type AnnotationTrigger = "auto" | "manual";
 
-async function runAnnotation() {
+export function shouldRunAnnotation(
+  trigger: AnnotationTrigger,
+  data: {
+    settings: ExtensionSettings;
+    hostname: string;
+    domainRules: DomainRule[];
+  }
+) {
+  if (!data.settings.extensionEnabled || !isSiteEnabled(data.hostname, data.domainRules)) {
+    return false;
+  }
+
+  return trigger !== "auto" || data.settings.annotateOnLoad;
+}
+
+async function runAnnotation(trigger: AnnotationTrigger) {
   if (annotationRunInFlight) {
     return;
   }
@@ -16,7 +32,7 @@ async function runAnnotation() {
   const { glossary, domainRules, settings } = await getStorageData();
   const hostname = window.location.hostname;
 
-  if (!settings.extensionEnabled || !isSiteEnabled(hostname, domainRules)) {
+  if (!shouldRunAnnotation(trigger, { settings, hostname, domainRules })) {
     annotationRunInFlight = false;
     return;
   }
@@ -95,9 +111,9 @@ export function annotateTextNode(textNode: Text, glossary: GlossaryEntry[], excl
 if (typeof chrome !== "undefined" && chrome.runtime?.onMessage) {
   chrome.runtime.onMessage.addListener((message) => {
     if (message.type === "kwt:run-annotation") {
-      void runAnnotation();
+      void runAnnotation("manual");
     }
   });
 
-  void runAnnotation();
+  void runAnnotation("auto");
 }

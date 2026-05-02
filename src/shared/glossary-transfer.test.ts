@@ -34,6 +34,21 @@ describe("glossary transfer helpers", () => {
     expect(() => parseGlossaryImport("{bad json")).toThrow("Glossary import must be valid JSON.");
   });
 
+  it("rejects JSON without valid glossary entries", () => {
+    expect(() =>
+      parseGlossaryImport(
+        JSON.stringify({
+          glossary: [
+            {
+              id: "entry-1",
+              source: "memoization"
+            }
+          ]
+        })
+      )
+    ).toThrow("Glossary import must contain a glossary array of valid entries.");
+  });
+
   it("creates the expected export structure", () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-04-18T07:00:00.000Z"));

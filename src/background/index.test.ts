@@ -2,6 +2,45 @@ import { describe, expect, it, vi } from "vitest";
 import { createBackgroundMessageHandler } from "./index";
 
 describe("background popup message flow", () => {
+  it("sends an annotation message to the active tab", async () => {
+    const sendMessageToTabMock = vi.fn().mockResolvedValue(undefined);
+    const handler = createBackgroundMessageHandler({
+      getStorageData: vi.fn(),
+      updateSettings: vi.fn(),
+      queryActiveTab: vi.fn().mockResolvedValue({
+        id: 9,
+        hostname: "docs.example.com"
+      }),
+      sendMessageToTab: sendMessageToTabMock
+    });
+
+    const response = await new Promise<unknown>((resolve) => {
+      handler({ type: "kwt:annotate-page" }, {} as chrome.runtime.MessageSender, resolve);
+    });
+
+    expect(sendMessageToTabMock).toHaveBeenCalledWith(9, { type: "kwt:run-annotation" });
+    expect(response).toEqual({ ok: true });
+  });
+
+  it("reports failure when annotation is requested without an active tab id", async () => {
+    const sendMessageToTabMock = vi.fn();
+    const handler = createBackgroundMessageHandler({
+      getStorageData: vi.fn(),
+      updateSettings: vi.fn(),
+      queryActiveTab: vi.fn().mockResolvedValue({
+        hostname: "unknown"
+      }),
+      sendMessageToTab: sendMessageToTabMock
+    });
+
+    const response = await new Promise<unknown>((resolve) => {
+      handler({ type: "kwt:annotate-page" }, {} as chrome.runtime.MessageSender, resolve);
+    });
+
+    expect(sendMessageToTabMock).not.toHaveBeenCalled();
+    expect(response).toEqual({ ok: false });
+  });
+
   it("returns the popup state contract for kwt:get-popup-state", async () => {
     const handler = createBackgroundMessageHandler({
       getStorageData: vi.fn().mockResolvedValue({
