@@ -57,6 +57,14 @@ export default defineConfig([
           varsIgnorePattern: "^_",
         },
       ],
+      "max-lines-per-function": [
+        "error",
+        {
+          max: 20,
+          skipBlankLines: true,
+          skipComments: true,
+        },
+      ],
       "no-console": ["warn", { allow: ["warn", "error"] }],
       "react/prop-types": "off",
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],

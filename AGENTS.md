@@ -116,6 +116,16 @@ corepack pnpm test:e2e
 
 构建目录、Playwright 报告、测试结果和依赖安装目录不得提交；应继续由 `.gitignore` 管理。
 
+## 代码风格和 Git Hooks
+
+- 每个函数最多 20 行，由 ESLint 的 `max-lines-per-function` 强制检查。
+- 函数必须使用表达意图的语义化名称，避免 `doSomething`、`handleData` 等无法说明职责的命名。
+- 一个函数只负责一个清晰动作；如果超过 20 行，应按真实职责拆分，不要为了过规则制造无意义的包装函数。
+- 优先选择直接、易读的实现。没有实际复用、隔离或测试价值时，不要增加抽象层、配置层或通用工具。
+- `pre-commit` 会对暂存文件执行 ESLint 自动修复和 Prettier 格式化。
+- `pre-push` 会执行完整 ESLint 和 `prettier --check`；检查失败时不得绕过 hook 推送。
+- 本地安装依赖后，Husky 会通过 `prepare` 配置 Git hooks。手动执行验证时使用 `corepack pnpm lint:fix` 和 `corepack pnpm format:check`。
+
 ## 文档和路线图
 
 代码、文档和实际分支状态必须保持一致。涉及功能或里程碑的改动，应检查并按需同步：
