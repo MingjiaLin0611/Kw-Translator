@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Kw Translator",
+  "version": "0.1.0",
+  "description": "为当前页面添加术语注释。",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_title": "Kw Translator",
+    "default_popup": "index.html"
+  }
+}

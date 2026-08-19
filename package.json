@@ -5,9 +5,12 @@
   "type": "module",
   "packageManager": "pnpm@10.10.0",
   "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:style": "stylelint \"**/*.{css,scss}\" --allow-empty-input",
+    "test:unit": "vitest run --environment jsdom",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "hooks:pre-commit": "lint-staged",
@@ -27,12 +30,19 @@
   },
   "devDependencies": {
     "@eslint/js": "9.30.1",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/chrome": "^0.2.6",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
     "eslint": "9.30.1",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "7.1.1",
     "eslint-plugin-react-refresh": "0.5.4",
     "globals": "17.11.0",
     "husky": "9.1.7",
+    "jsdom": "^30.0.1",
     "lint-staged": "17.3.0",
     "postcss-scss": "^4.0.9",
     "prettier": "3.9.6",
@@ -40,6 +50,12 @@
     "stylelint-config-standard": "^40.0.0",
     "stylelint-config-standard-scss": "^17.0.0",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.67.0"
+    "typescript-eslint": "8.67.0",
+    "vite": "^8.2.1",
+    "vitest": "^4.1.11"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   }
 }
