@@ -50,27 +50,6 @@ keyword(translation)
 
 共享领域逻辑应尽量不直接依赖 Chrome API。浏览器 API 访问集中在 storage、background 和入口适配层中，消息请求和响应保持明确的类型契约。
 
-## 当前数据模型约束
-
-当前 M2 数据模型是单一扁平 `glossary` 数组，配合 `domainRules` 和 `settings` 保存于统一存储键。词条至少包含：
-
-- `id`
-- `source`
-- `translation`
-- `enabled`
-- `caseSensitive`
-- `createdAt`
-- `updatedAt`
-
-后续 M3 计划引入 `GlossaryCollection` 和活动词库。迁移时必须：
-
-- 保留旧的所有词条、设置和域名规则。
-- 为旧扁平词库创建安全的默认集合。
-- 明确活动集合删除或失效时的回退策略。
-- 不让导入一个集合覆盖用户的其他集合。
-
-如果未来加入 AI 配置，API key 必须只保存在本地，并且绝不能进入词库导出数据、日志、测试快照或提交记录。
-
 ## 核心行为要求
 
 修改注释引擎时必须保持：
