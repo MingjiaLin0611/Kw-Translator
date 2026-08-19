@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "lint:style": "stylelint \"**/*.css\" --allow-empty-input",
+    "lint:style": "stylelint \"**/*.{css,scss}\" --allow-empty-input",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "hooks:pre-commit": "lint-staged",
@@ -20,7 +20,7 @@
       "prettier --write"
     ],
     "*.{json,md,yml,yaml}": "prettier --write",
-    "*.css": [
+    "*.{css,scss}": [
       "stylelint --fix",
       "prettier --write"
     ]
@@ -34,9 +34,11 @@
     "globals": "17.11.0",
     "husky": "9.1.7",
     "lint-staged": "17.3.0",
+    "postcss-scss": "^4.0.9",
     "prettier": "3.9.6",
     "stylelint": "^17.14.1",
     "stylelint-config-standard": "^40.0.0",
+    "stylelint-config-standard-scss": "^17.0.0",
     "typescript": "5.9.3",
     "typescript-eslint": "8.67.0"
   }

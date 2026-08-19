@@ -7,4 +7,11 @@ export default {
     "**/playwright-report/**",
     "**/test-results/**",
   ],
+  overrides: [
+    {
+      files: ["**/*.scss"],
+      customSyntax: "postcss-scss",
+      extends: ["stylelint-config-standard-scss"],
+    },
+  ],
 };
