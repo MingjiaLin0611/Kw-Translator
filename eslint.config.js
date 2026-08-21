@@ -66,6 +66,7 @@ export default defineConfig([
         },
       ],
       "no-console": ["warn", { allow: ["warn", "error"] }],
+      "react/forbid-dom-props": ["error", { forbid: ["style"] }],
       "react/prop-types": "off",
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
     },
