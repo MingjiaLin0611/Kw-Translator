@@ -4,6 +4,9 @@
   "version": "0.1.0",
   "description": "为当前页面添加术语注释。",
   "permissions": ["activeTab", "scripting"],
+  "background": {
+    "service_worker": "assets/background.js"
+  },
   "action": {
     "default_title": "Kw Translator",
     "default_popup": "index.html"

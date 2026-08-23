@@ -1,16 +1,13 @@
 import type { AnnotateCurrentPage } from "./Popup";
-
-type AnnotationMessage = {
-  type: "ANNOTATE_CURRENT_PAGE";
-  source: string;
-  translation: string;
-};
+import type { AnnotationMessage, AnnotationResponse } from "../shared/messages";
 
 export function sendAnnotationMessage(): AnnotateCurrentPage {
-  return (source, translation) =>
-    chrome.runtime.sendMessage<AnnotationMessage>({
+  return async (source, translation) => {
+    const response = await chrome.runtime.sendMessage<AnnotationMessage, AnnotationResponse>({
       type: "ANNOTATE_CURRENT_PAGE",
       source,
       translation,
-    });
+    } satisfies AnnotationMessage);
+    if (!response.ok) throw new Error(response.error);
+  };
 }
